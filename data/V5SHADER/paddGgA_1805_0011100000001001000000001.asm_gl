@@ -1,0 +1,27 @@
+!!ARBfp1.0
+OPTION NV_fragment_program2;
+# cgc version 3.1.0013, build date Apr 18 2012
+# command line args: -q -profile fp40
+# source file: paddGgA_1805_0011100000001001000000001.fx
+#vendor NVIDIA Corporation
+#version 3.1.0.13
+#profile fp40
+#program main
+#semantic sColorMap
+#semantic s2SpecularMap
+#var float4 _Input.h4Color : $vin.COLOR0 : COL0 : 0 : 1
+#var float2 _Input.h2UV0 : $vin.TEXCOORD0 : TEX0 : 0 : 1
+#var float2 _Input.h2UV1 : $vin.TEXCOORD1 : TEX1 : 0 : 1
+#var sampler2D sColorMap :  : texunit 0 : -1 : 1
+#var sampler2D s2SpecularMap :  : texunit 1 : -1 : 1
+#var half4 main : $vout.COLOR : COL : -1 : 1
+SHORT TEMP H0;
+TEMP RC;
+TEMP HC;
+SHORT OUTPUT oCol = result.color;
+TEX   H0, fragment.texcoord[0], texture[0], 2D;
+MULH  H0.xyz, H0, fragment.color.primary;
+MULH  oCol.xyz, H0, H0.w;
+TEX   oCol.w, fragment.texcoord[1], texture[1], 2D;
+END
+# 4 instructions, 0 R-regs, 1 H-regs
