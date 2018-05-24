@@ -1,0 +1,28 @@
+!!ARBfp1.0
+OPTION NV_fragment_program2;
+# cgc version 3.1.0013, build date Apr 18 2012
+# command line args: -q -profile fp40
+# source file: pbg_N.fx
+#vendor NVIDIA Corporation
+#version 3.1.0.13
+#profile fp40
+#program main
+#semantic s2ColorMap
+#var float4 Input.h4ColorScale : $vin.COLOR0 : COL0 : 0 : 1
+#var float3 Input.h3ColorBias : $vin.COLOR1 : COL1 : 0 : 1
+#var float2 Input.h2UV0 : $vin.TEXCOORD0 : TEX0 : 0 : 1
+#var sampler2D s2ColorMap :  : texunit 0 : -1 : 1
+#var half4 main : $vout.COLOR : COL : -1 : 1
+#const c[0] = 0.90185547
+PARAM c[1] = { { 0.90185547 } };
+SHORT TEMP H0;
+SHORT TEMP H1;
+TEMP RC;
+TEMP HC;
+SHORT OUTPUT oCol = result.color;
+MOVH  H1.xyz, fragment.color.secondary;
+TEX   H0.xyz, fragment.texcoord[0], texture[0], 2D;
+MADH  oCol.xyz, H0, fragment.color.primary, H1;
+MOVH  oCol.w, c[0].x;
+END
+# 4 instructions, 0 R-regs, 2 H-regs

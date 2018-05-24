@@ -1,0 +1,17 @@
+!!ARBfp1.0
+OPTION NV_fragment_program2;
+# cgc version 3.1.0013, build date Apr 18 2012
+# command line args: -q -profile fp40
+# source file: pcstmP_A_1805_110000000000000000000001.fx
+#vendor NVIDIA Corporation
+#version 3.1.0.13
+#profile fp40
+#program main
+#var float4 _Input.h4Color : $vin.COLOR0 : COL0 : 0 : 1
+#var half4 main : $vout.COLOR : COL : -1 : 1
+TEMP RC;
+TEMP HC;
+SHORT OUTPUT oCol = result.color;
+MOVH  oCol, fragment.color.primary;
+END
+# 1 instructions, 0 R-regs, 0 H-regs

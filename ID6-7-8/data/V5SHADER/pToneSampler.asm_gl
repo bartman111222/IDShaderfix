@@ -1,0 +1,56 @@
+!!ARBfp1.0
+OPTION NV_fragment_program2;
+# cgc version 3.1.0013, build date Apr 18 2012
+# command line args: -q -profile fp40
+# source file: pToneSampler.fx
+#vendor NVIDIA Corporation
+#version 3.1.0.13
+#profile fp40
+#program main
+#semantic main.s2Source
+#semantic main.s2Noise
+#semantic main.g_f4Alpha
+#var float2 Input.TexCoord0 : $vin.TEXCOORD0 : TEX0 : 0 : 1
+#var float2 Input.TexCoord1 : $vin.TEXCOORD1 : TEX1 : 0 : 1
+#var sampler2D s2Source :  : texunit 0 : 1 : 1
+#var sampler2D s2Noise :  : texunit 1 : 2 : 1
+#var float4 g_f4Alpha :  : c[0] : 3 : 1
+#var half4 main : $vout.COLOR : COL : -1 : 1
+#const c[1] = 0.47998047 1 1.7724609 0
+#const c[2] = 0.5 -0.41894531 -0.080993652
+#const c[3] = -0.16894531 -0.33105469 0.5
+#const c[4] = 0.29907227 0.58691406 0.11401367
+#const c[5] = 2.9003906 0.26000977
+#const c[6] = 1 -0.34399414 -0.71386719
+#const c[7] = 1 0 1.4023438
+PARAM c[8] = { program.local[0],
+		{ 0.47998047, 1, 1.7724609, 0 },
+		{ 0.5, -0.41894531, -0.080993652 },
+		{ -0.16894531, -0.33105469, 0.5 },
+		{ 0.29907227, 0.58691406, 0.11401367 },
+		{ 2.9003906, 0.26000977 },
+		{ 1, -0.34399414, -0.71386719 },
+		{ 1, 0, 1.4023438 } };
+TEMP R0;
+SHORT TEMP H0;
+SHORT TEMP H1;
+TEMP RC;
+TEMP HC;
+SHORT OUTPUT oCol = result.color;
+TEX   H0.xyz, fragment.texcoord[0], texture[0], 2D;
+TEX   R0, fragment.texcoord[1], texture[1], 2D;
+DP3H  H1.z, H0, c[2];
+DP3H  H1.x, H0, c[4];
+DP3H  H1.y, H0, c[3];
+MULH  H1.xyz, H1, c[5].xyyw;
+DP3H  H0.z, H1, c[1].yzww;
+DP3H  H0.x, H1, c[7];
+DP3H  H0.y, H1, c[6];
+ADDH  H1.xyz, H0, -c[2].x;
+MOVH  H0.x, c[2];
+MADH  H0.xyz, H1, c[1].x, H0.x;
+MADR  R0, R0, -c[0].x, R0;
+MOVH  H0.w, c[1];
+MADR  oCol, H0, c[0].x, R0;
+END
+# 15 instructions, 1 R-regs, 2 H-regs
