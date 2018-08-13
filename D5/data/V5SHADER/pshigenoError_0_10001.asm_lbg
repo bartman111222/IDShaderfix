@@ -1,0 +1,34 @@
+!!ARBfp1.0
+OPTION NV_fragment_program2;
+# cgc version 1.5.0010, build date Jul  6 2006 22:12:51
+# command line args: -q -profile fp40
+# source file: pshigenoError_0_10001.fx
+#vendor NVIDIA Corporation
+#version 1.5.0.10
+#profile fp40
+#program main
+#semantic s2BaseMap
+#semantic s2HighLightMap
+#semantic h4Fresnel
+#semantic h4FresnelParameter
+#semantic h4CameraLight
+#semantic h4AmbientLight
+#var float4 Input.h4UV0 : $vin.TEXCOORD0 :  : 0 : 0
+#var float3 Input.h3Normal : $vin.TEXCOORD2 :  : 0 : 0
+#var float3 Input.h3Normal_View : $vin.TEXCOORD3 :  : 0 : 0
+#var float3 Input.h3Pos_View : $vin.TEXCOORD4 :  : 0 : 0
+#var sampler2D s2BaseMap :  :  : -1 : 0
+#var sampler2D s2HighLightMap :  :  : -1 : 0
+#var half4 h4Fresnel :  :  : -1 : 0
+#var half4 h4FresnelParameter :  :  : -1 : 0
+#var half4 h4CameraLight :  :  : -1 : 0
+#var half4 h4AmbientLight :  :  : -1 : 0
+#var half4 main : $vout.COLOR : COL : -1 : 1
+#const c[0] = 1 0
+PARAM c[1] = { { 1, 0 } };
+TEMP RC;
+TEMP HC;
+SHORT OUTPUT oCol = result.color;
+MOVH  oCol, c[0].xyyx;
+END
+# 1 instructions, 0 R-regs, 0 H-regs

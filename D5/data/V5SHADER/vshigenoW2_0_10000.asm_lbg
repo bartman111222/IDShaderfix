@@ -1,0 +1,242 @@
+!!ARBvp1.0
+OPTION NV_vertex_program3;
+# cgc version 1.5.0010, build date Jul  6 2006 22:12:51
+# command line args: -q -profile vp40
+# source file: vshigenoW2_0_10000.fx
+#vendor NVIDIA Corporation
+#version 1.5.0.10
+#profile vp40
+#program main
+#semantic mtxWorld
+#semantic mtxWorldView
+#semantic mtxWorldViewProj
+#semantic m4Local2ShadowMap
+#semantic aVertexBlend
+#var float4 _Input.Position : $vin.POSITION : ATTR0 : 0 : 1
+#var float3 _Input.Normal : $vin.NORMAL : ATTR2 : 0 : 1
+#var float2 _Input.TexCoord0 : $vin.TEXCOORD0 : ATTR8 : 0 : 1
+#var float3x4 mtxWorld :  : c[0], 3 : -1 : 1
+#var float3x4 mtxWorldView :  : c[3], 3 : -1 : 1
+#var float4x4 mtxWorldViewProj :  : c[6], 4 : -1 : 1
+#var float4x4 m4Local2ShadowMap :  : , 4 : -1 : 0
+#var float4 aVertexBlend[0] :  :  : -1 : 0
+#var float4 aVertexBlend[1] :  :  : -1 : 0
+#var float4 aVertexBlend[2] :  :  : -1 : 0
+#var float4 aVertexBlend[3] :  :  : -1 : 0
+#var float4 aVertexBlend[4] :  :  : -1 : 0
+#var float4 aVertexBlend[5] :  :  : -1 : 0
+#var float4 aVertexBlend[6] :  :  : -1 : 0
+#var float4 aVertexBlend[7] :  :  : -1 : 0
+#var float4 aVertexBlend[8] :  :  : -1 : 0
+#var float4 aVertexBlend[9] :  :  : -1 : 0
+#var float4 aVertexBlend[10] :  :  : -1 : 0
+#var float4 aVertexBlend[11] :  :  : -1 : 0
+#var float4 aVertexBlend[12] :  :  : -1 : 0
+#var float4 aVertexBlend[13] :  :  : -1 : 0
+#var float4 aVertexBlend[14] :  :  : -1 : 0
+#var float4 aVertexBlend[15] :  :  : -1 : 0
+#var float4 aVertexBlend[16] :  :  : -1 : 0
+#var float4 aVertexBlend[17] :  :  : -1 : 0
+#var float4 aVertexBlend[18] :  :  : -1 : 0
+#var float4 aVertexBlend[19] :  :  : -1 : 0
+#var float4 aVertexBlend[20] :  :  : -1 : 0
+#var float4 aVertexBlend[21] :  :  : -1 : 0
+#var float4 aVertexBlend[22] :  :  : -1 : 0
+#var float4 aVertexBlend[23] :  :  : -1 : 0
+#var float4 aVertexBlend[24] :  :  : -1 : 0
+#var float4 aVertexBlend[25] :  :  : -1 : 0
+#var float4 aVertexBlend[26] :  :  : -1 : 0
+#var float4 aVertexBlend[27] :  :  : -1 : 0
+#var float4 aVertexBlend[28] :  :  : -1 : 0
+#var float4 aVertexBlend[29] :  :  : -1 : 0
+#var float4 aVertexBlend[30] :  :  : -1 : 0
+#var float4 aVertexBlend[31] :  :  : -1 : 0
+#var float4 aVertexBlend[32] :  :  : -1 : 0
+#var float4 aVertexBlend[33] :  :  : -1 : 0
+#var float4 aVertexBlend[34] :  :  : -1 : 0
+#var float4 aVertexBlend[35] :  :  : -1 : 0
+#var float4 aVertexBlend[36] :  :  : -1 : 0
+#var float4 aVertexBlend[37] :  :  : -1 : 0
+#var float4 aVertexBlend[38] :  :  : -1 : 0
+#var float4 aVertexBlend[39] :  :  : -1 : 0
+#var float4 aVertexBlend[40] :  :  : -1 : 0
+#var float4 aVertexBlend[41] :  :  : -1 : 0
+#var float4 aVertexBlend[42] :  :  : -1 : 0
+#var float4 aVertexBlend[43] :  :  : -1 : 0
+#var float4 aVertexBlend[44] :  :  : -1 : 0
+#var float4 aVertexBlend[45] :  :  : -1 : 0
+#var float4 aVertexBlend[46] :  :  : -1 : 0
+#var float4 aVertexBlend[47] :  :  : -1 : 0
+#var float4 aVertexBlend[48] :  :  : -1 : 0
+#var float4 aVertexBlend[49] :  :  : -1 : 0
+#var float4 aVertexBlend[50] :  :  : -1 : 0
+#var float4 aVertexBlend[51] :  :  : -1 : 0
+#var float4 aVertexBlend[52] :  :  : -1 : 0
+#var float4 aVertexBlend[53] :  :  : -1 : 0
+#var float4 aVertexBlend[54] :  :  : -1 : 0
+#var float4 aVertexBlend[55] :  :  : -1 : 0
+#var float4 aVertexBlend[56] :  :  : -1 : 0
+#var float4 aVertexBlend[57] :  :  : -1 : 0
+#var float4 aVertexBlend[58] :  :  : -1 : 0
+#var float4 aVertexBlend[59] :  :  : -1 : 0
+#var float4 aVertexBlend[60] :  :  : -1 : 0
+#var float4 aVertexBlend[61] :  :  : -1 : 0
+#var float4 aVertexBlend[62] :  :  : -1 : 0
+#var float4 aVertexBlend[63] :  :  : -1 : 0
+#var float4 aVertexBlend[64] :  :  : -1 : 0
+#var float4 aVertexBlend[65] :  :  : -1 : 0
+#var float4 aVertexBlend[66] :  :  : -1 : 0
+#var float4 aVertexBlend[67] :  :  : -1 : 0
+#var float4 aVertexBlend[68] :  :  : -1 : 0
+#var float4 aVertexBlend[69] :  :  : -1 : 0
+#var float4 aVertexBlend[70] :  :  : -1 : 0
+#var float4 aVertexBlend[71] :  :  : -1 : 0
+#var float4 aVertexBlend[72] :  :  : -1 : 0
+#var float4 aVertexBlend[73] :  :  : -1 : 0
+#var float4 aVertexBlend[74] :  :  : -1 : 0
+#var float4 aVertexBlend[75] :  :  : -1 : 0
+#var float4 aVertexBlend[76] :  :  : -1 : 0
+#var float4 aVertexBlend[77] :  :  : -1 : 0
+#var float4 aVertexBlend[78] :  :  : -1 : 0
+#var float4 aVertexBlend[79] :  :  : -1 : 0
+#var float4 aVertexBlend[80] :  :  : -1 : 0
+#var float4 aVertexBlend[81] :  :  : -1 : 0
+#var float4 aVertexBlend[82] :  :  : -1 : 0
+#var float4 aVertexBlend[83] :  :  : -1 : 0
+#var float4 aVertexBlend[84] :  :  : -1 : 0
+#var float4 aVertexBlend[85] :  :  : -1 : 0
+#var float4 aVertexBlend[86] :  :  : -1 : 0
+#var float4 aVertexBlend[87] :  :  : -1 : 0
+#var float4 aVertexBlend[88] :  :  : -1 : 0
+#var float4 aVertexBlend[89] :  :  : -1 : 0
+#var float4 aVertexBlend[90] :  :  : -1 : 0
+#var float4 aVertexBlend[91] :  :  : -1 : 0
+#var float4 aVertexBlend[92] :  :  : -1 : 0
+#var float4 aVertexBlend[93] :  :  : -1 : 0
+#var float4 aVertexBlend[94] :  :  : -1 : 0
+#var float4 aVertexBlend[95] :  :  : -1 : 0
+#var float4 aVertexBlend[96] :  :  : -1 : 0
+#var float4 aVertexBlend[97] :  :  : -1 : 0
+#var float4 aVertexBlend[98] :  :  : -1 : 0
+#var float4 aVertexBlend[99] :  :  : -1 : 0
+#var float4 aVertexBlend[100] :  :  : -1 : 0
+#var float4 aVertexBlend[101] :  :  : -1 : 0
+#var float4 aVertexBlend[102] :  :  : -1 : 0
+#var float4 aVertexBlend[103] :  :  : -1 : 0
+#var float4 aVertexBlend[104] :  :  : -1 : 0
+#var float4 aVertexBlend[105] :  :  : -1 : 0
+#var float4 aVertexBlend[106] :  :  : -1 : 0
+#var float4 aVertexBlend[107] :  :  : -1 : 0
+#var float4 aVertexBlend[108] :  :  : -1 : 0
+#var float4 aVertexBlend[109] :  :  : -1 : 0
+#var float4 aVertexBlend[110] :  :  : -1 : 0
+#var float4 aVertexBlend[111] :  :  : -1 : 0
+#var float4 aVertexBlend[112] :  :  : -1 : 0
+#var float4 aVertexBlend[113] :  :  : -1 : 0
+#var float4 aVertexBlend[114] :  :  : -1 : 0
+#var float4 aVertexBlend[115] :  :  : -1 : 0
+#var float4 aVertexBlend[116] :  :  : -1 : 0
+#var float4 aVertexBlend[117] :  :  : -1 : 0
+#var float4 aVertexBlend[118] :  :  : -1 : 0
+#var float4 aVertexBlend[119] :  :  : -1 : 0
+#var float4 aVertexBlend[120] :  :  : -1 : 0
+#var float4 aVertexBlend[121] :  :  : -1 : 0
+#var float4 aVertexBlend[122] :  :  : -1 : 0
+#var float4 aVertexBlend[123] :  :  : -1 : 0
+#var float4 aVertexBlend[124] :  :  : -1 : 0
+#var float4 aVertexBlend[125] :  :  : -1 : 0
+#var float4 aVertexBlend[126] :  :  : -1 : 0
+#var float4 aVertexBlend[127] :  :  : -1 : 0
+#var float4 aVertexBlend[128] :  :  : -1 : 0
+#var float4 aVertexBlend[129] :  :  : -1 : 0
+#var float4 aVertexBlend[130] :  :  : -1 : 0
+#var float4 aVertexBlend[131] :  :  : -1 : 0
+#var float4 aVertexBlend[132] :  :  : -1 : 0
+#var float4 aVertexBlend[133] :  :  : -1 : 0
+#var float4 aVertexBlend[134] :  :  : -1 : 0
+#var float4 aVertexBlend[135] :  :  : -1 : 0
+#var float4 aVertexBlend[136] :  :  : -1 : 0
+#var float4 aVertexBlend[137] :  :  : -1 : 0
+#var float4 aVertexBlend[138] :  :  : -1 : 0
+#var float4 aVertexBlend[139] :  :  : -1 : 0
+#var float4 aVertexBlend[140] :  :  : -1 : 0
+#var float4 aVertexBlend[141] :  :  : -1 : 0
+#var float4 aVertexBlend[142] :  :  : -1 : 0
+#var float4 aVertexBlend[143] :  :  : -1 : 0
+#var float4 aVertexBlend[144] :  :  : -1 : 0
+#var float4 aVertexBlend[145] :  :  : -1 : 0
+#var float4 aVertexBlend[146] :  :  : -1 : 0
+#var float4 aVertexBlend[147] :  :  : -1 : 0
+#var float4 aVertexBlend[148] :  :  : -1 : 0
+#var float4 aVertexBlend[149] :  :  : -1 : 0
+#var float4 aVertexBlend[150] :  :  : -1 : 0
+#var float4 aVertexBlend[151] :  :  : -1 : 0
+#var float4 aVertexBlend[152] :  :  : -1 : 0
+#var float4 aVertexBlend[153] :  :  : -1 : 0
+#var float4 aVertexBlend[154] :  :  : -1 : 0
+#var float4 aVertexBlend[155] :  :  : -1 : 0
+#var float4 aVertexBlend[156] :  :  : -1 : 0
+#var float4 aVertexBlend[157] :  :  : -1 : 0
+#var float4 aVertexBlend[158] :  :  : -1 : 0
+#var float4 aVertexBlend[159] :  :  : -1 : 0
+#var float4 aVertexBlend[160] :  :  : -1 : 0
+#var float4 aVertexBlend[161] :  :  : -1 : 0
+#var float4 aVertexBlend[162] :  :  : -1 : 0
+#var float4 aVertexBlend[163] :  :  : -1 : 0
+#var float4 aVertexBlend[164] :  :  : -1 : 0
+#var float4 aVertexBlend[165] :  :  : -1 : 0
+#var float4 aVertexBlend[166] :  :  : -1 : 0
+#var float4 aVertexBlend[167] :  :  : -1 : 0
+#var float4 aVertexBlend[168] :  :  : -1 : 0
+#var float4 aVertexBlend[169] :  :  : -1 : 0
+#var float4 aVertexBlend[170] :  :  : -1 : 0
+#var float4 aVertexBlend[171] :  :  : -1 : 0
+#var float4 aVertexBlend[172] :  :  : -1 : 0
+#var float4 aVertexBlend[173] :  :  : -1 : 0
+#var float4 aVertexBlend[174] :  :  : -1 : 0
+#var float4 aVertexBlend[175] :  :  : -1 : 0
+#var float4 aVertexBlend[176] :  :  : -1 : 0
+#var float4 aVertexBlend[177] :  :  : -1 : 0
+#var float4 aVertexBlend[178] :  :  : -1 : 0
+#var float4 aVertexBlend[179] :  :  : -1 : 0
+#var float4 aVertexBlend[180] :  :  : -1 : 0
+#var float4 aVertexBlend[181] :  :  : -1 : 0
+#var float4 aVertexBlend[182] :  :  : -1 : 0
+#var float4 aVertexBlend[183] :  :  : -1 : 0
+#var float4 aVertexBlend[184] :  :  : -1 : 0
+#var float4 aVertexBlend[185] :  :  : -1 : 0
+#var float4 aVertexBlend[186] :  :  : -1 : 0
+#var float4 aVertexBlend[187] :  :  : -1 : 0
+#var float4 aVertexBlend[188] :  :  : -1 : 0
+#var float4 aVertexBlend[189] :  :  : -1 : 0
+#var float4 aVertexBlend[190] :  :  : -1 : 0
+#var float4 aVertexBlend[191] :  :  : -1 : 0
+#var float4 main.Position : $vout.POSITION : HPOS : -1 : 1
+#var float4 main.f4UV_BaseMap : $vout.TEXCOORD0 : TEX0 : -1 : 1
+#var float3 main.f3Normal : $vout.TEXCOORD2 : TEX2 : -1 : 1
+#var float3 main.f3Normal_View : $vout.TEXCOORD3 : TEX3 : -1 : 1
+#var float3 main.f3Pos_View : $vout.TEXCOORD4 : TEX4 : -1 : 1
+#var float4 main.f4Color : $vout.COLOR0 : COL0 : -1 : 1
+#const c[10] = 0
+PARAM c[11] = { program.local[0..9],
+		{ 0 } };
+TEMP RC, HC;
+BB1:
+MOV   result.color, c[10].x;
+MOV   result.texcoord[0].xy, vertex.attrib[8];
+MOV   result.texcoord[0].zw, c[10].x;
+DP4   result.position.w, vertex.attrib[0], c[9];
+DP4   result.position.z, vertex.attrib[0], c[8];
+DP4   result.position.y, vertex.attrib[0], c[7];
+DP4   result.position.x, vertex.attrib[0], c[6];
+DP3   result.texcoord[2].z, vertex.attrib[2], c[2];
+DP3   result.texcoord[2].y, vertex.attrib[2], c[1];
+DP3   result.texcoord[2].x, vertex.attrib[2], c[0];
+DP3   result.texcoord[3].z, vertex.attrib[2], c[5];
+DP3   result.texcoord[3].y, vertex.attrib[2], c[4];
+DP3   result.texcoord[3].x, vertex.attrib[2], c[3];
+DP4   result.texcoord[4].z, vertex.attrib[0], c[5];
+DP4   result.texcoord[4].y, vertex.attrib[0], c[4];
+DP4   result.texcoord[4].x, vertex.attrib[0], c[3];
+END
+# 16 instructions, 0 R-regs

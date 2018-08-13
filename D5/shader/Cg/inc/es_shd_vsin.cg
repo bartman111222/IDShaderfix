@@ -1,0 +1,191 @@
+//=============================================================================
+/// @file
+/// @author
+/// @brief
+///
+/// Copyright(C)SEGA
+//=============================================================================
+//-----------------------------------------------------------------------------
+/// 頂点シェーダーの入力用構造体を集めたもの
+///
+/// VertexElementとの対応で使われないところには
+/// 自動的に０が入ります。
+//-----------------------------------------------------------------------------
+// PS3のCgではBLENDWEIGHT,BLENDINDICESが使えないのでCOLOR0,COLOR1を使います.
+#ifdef	MODE_PS3
+#define	BLENDWEIGHT	COLOR0
+#define	BLENDINDICES COLOR1
+#endif
+
+struct	VS_INPUT_P
+{
+	float4	Position	: POSITION;	// 座標
+};
+struct VS_INPUT_PC
+{
+	float4	Position	: POSITION;	// 位置
+	float4	Color		: COLOR0; 	// カラー
+};
+
+struct VS_INPUT_PN
+{
+	float4	Position	: POSITION;	// 位置
+	float3	Normal		: NORMAL;     	// 法線
+};
+
+struct VS_INPUT_PNW2
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4	Weight0		: ATTR1;	// ブレンドウェイト0&1
+};
+
+struct VS_INPUT_PNW4
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4	Weight0		: ATTR1;	// ブレンドウェイト0&1
+	float4	Weight1		: ATTR7;	// ブレンドウェイト2&3
+};
+
+struct VS_INPUT_PT
+{
+	float4 Position   	: POSITION;	// 位置
+	float2 TexCoord0 	: TEXCOORD0;	// テクスチャ座標
+};
+
+struct VS_INPUT_PT2
+{
+	float4 Position   	: POSITION;	// 位置
+	float2 TexCoord0 	: TEXCOORD0;	// テクスチャ座標0
+	float2 TexCoord1 	: TEXCOORD1;	// テクスチャ座標1	
+};
+
+struct VS_INPUT_PCT
+{
+	float4	Position   	: POSITION;   	// 位置
+	float4	Color      	: COLOR0;     	// カラー
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+};
+
+struct VS_INPUT_PCT2
+{
+	float4	Position   	: POSITION;   	// 位置
+	float4	Color      	: COLOR0;     	// カラー
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float2	TexCoord1	: TEXCOORD1;	// テクスチャ座標1	
+};
+
+struct VS_INPUT_PNT
+{
+	float4 Position   	: POSITION;	// 位置
+	float3 	Normal     	: NORMAL;     	// 法線
+	float2 TexCoord0 	: TEXCOORD0;	// テクスチャ座標0
+	float2 TexCoord1 	: TEXCOORD1;	// テクスチャ座標1
+};
+
+struct VS_INPUT_PNT2
+{
+	float4 	Position   	: POSITION;   	// 位置
+	float3 	Normal     	: NORMAL;     	// 法線
+	float2	TexCoord0  	: TEXCOORD0;  	// テクスチャ座標0
+	float2	TexCoord1  	: TEXCOORD1;  	// テクスチャ座標1	
+};
+
+struct VS_INPUT_PNC
+{
+	float4 Position		: POSITION;   // 位置
+	float3 Normal     	: NORMAL;     // 法線
+	float4 Color      	: COLOR0;     // カラー
+};
+
+struct VS_INPUT_PNCT
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4	Color		: COLOR;	// 頂点カラー
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+};
+
+struct VS_INPUT_PNCT2
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4	Color		: COLOR;	// 頂点カラー
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float2	TexCoord1	: TEXCOORD1;	// テクスチャ座標1	
+};
+
+struct VS_INPUT_PNTW2
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float4	Weight0		: ATTR1;	// ブレンドウェイト0&1
+};
+
+struct VS_INPUT_PNTW4
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float4	Weight0		: ATTR1;		// ブレンドウェイト0&1
+	float4	Weight1		: ATTR7;	// ブレンドウェイト2&3
+};
+
+struct VS_INPUT_PBT
+{
+	float4 	Position   	: POSITION;   	// 位置
+	float3 	Normal     	: NORMAL;     	// 法線
+	float4 	Tangent     	: TANGENT;     	// 接線
+	float2	TexCoord0  	: TEXCOORD0;  	// テクスチャ座標0
+};
+
+struct VS_INPUT_PBT2
+{
+	float4 	Position   	: POSITION;   	// 位置
+	float3 	Normal     	: NORMAL;     	// 法線
+	float4 	Tangent     	: TANGENT;     	// 接線
+	float2	TexCoord0  	: TEXCOORD0;  	// テクスチャ座標0
+	float2	TexCoord1  	: TEXCOORD1;  	// テクスチャ座標1	
+};
+
+struct VS_INPUT_PBTW2
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4 	Tangent     	: TANGENT;     	// 接線	
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float4	Weight0		: ATTR1;	// ブレンドウェイト0&1
+};
+
+struct VS_INPUT_PBT2W2
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4 	Tangent     	: TANGENT;     	// 接線	
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float2	TexCoord1  	: TEXCOORD1;  	// テクスチャ座標1	
+	float4	Weight0		: ATTR1;	// ブレンドウェイト0&1
+};
+
+struct VS_INPUT_PBTW4
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4 	Tangent     	: TANGENT;     	// 接線	
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float4	Weight0		: ATTR1;	// ブレンドウェイト0&1
+	float4	Weight1		: ATTR7;	// ブレンドウェイト2&3	
+};
+
+struct VS_INPUT_PBT2W4
+{
+	float4	Position	: POSITION;	// 座標
+	float3	Normal		: NORMAL;	// 法線
+	float4 	Tangent     	: TANGENT;     	// 接線	
+	float2	TexCoord0	: TEXCOORD0;	// テクスチャ座標0
+	float2	TexCoord1  	: TEXCOORD1;  	// テクスチャ座標1		
+	float4	Weight0		: ATTR1;	// ブレンドウェイト0&1
+	float4	Weight1		: ATTR7;	// ブレンドウェイト2&3	
+};

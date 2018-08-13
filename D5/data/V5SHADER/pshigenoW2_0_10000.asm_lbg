@@ -1,0 +1,71 @@
+!!ARBfp1.0
+OPTION NV_fragment_program2;
+# cgc version 1.5.0010, build date Jul  6 2006 22:12:51
+# command line args: -q -profile fp40
+# source file: pshigenoW2_0_10000.fx
+#vendor NVIDIA Corporation
+#version 1.5.0.10
+#profile fp40
+#program main
+#semantic s2BaseMap
+#semantic s2HighLightMap
+#semantic h4Fresnel
+#semantic h4FresnelParameter
+#semantic h4CameraLight
+#semantic h4AmbientLight
+#var float4 Input.h4UV0 : $vin.TEXCOORD0 : TEX0 : 0 : 1
+#var float3 Input.h3Normal : $vin.TEXCOORD2 : TEX2 : 0 : 1
+#var float3 Input.h3Normal_View : $vin.TEXCOORD3 : TEX3 : 0 : 1
+#var float3 Input.h3Pos_View : $vin.TEXCOORD4 : TEX4 : 0 : 1
+#var sampler2D s2BaseMap :  : texunit 0 : -1 : 1
+#var sampler2D s2HighLightMap :  : texunit 1 : -1 : 1
+#var half4 h4Fresnel :  : c[0] : -1 : 1
+#var half4 h4FresnelParameter :  : c[1] : -1 : 1
+#var half4 h4CameraLight :  : c[2] : -1 : 1
+#var half4 h4AmbientLight :  : c[3] : -1 : 1
+#var half4 main : $vout.COLOR : COL : -1 : 1
+#const c[4] = 0.9018555 1 0 0.1999512
+#const c[5] = 1.700195 0.3000488
+PARAM c[6] = { program.local[0..3],
+		{ 0.90185547, 1, 0, 0.19995117 },
+		{ 1.7001953, 0.30004883 } };
+SHORT TEMP H0;
+SHORT TEMP H1;
+TEMP RC;
+TEMP HC;
+SHORT OUTPUT oCol = result.color;
+NRMH  H0.xyz, fragment.texcoord[2];
+NRMH  H0.xyz, H0;
+DP3H  H0.w, -H0, c[3];
+DP3H  H0.x, -H0, c[2];
+MULH  H0.y, H0.w, c[3].w;
+MULH  H0.x, H0, c[2].w;
+ADDH  H0.z, c[1], c[1].w;
+MAXH  H0.y, H0, c[4].z;
+MAXH  H0.x, H0, c[4].z;
+ADDH  H0.x, H0, H0.y;
+ADDH  H0.x, H0, -c[4].w;
+MAXH  H0.x, H0, c[4].z;
+MULH  H0.x, H0, c[5];
+MULH  H0.y, H0.x, H0.x;
+ADDH  H0.w, c[1].z, -c[1];
+ADDH  H0.x, H0.z, -H0.w;
+RCPH  H1.x, H0.x;
+ADDH  H0.w, H0.y, -H0;
+MOVH  H0.x, c[4].y;
+SGTHC HC.x, H0.y, H0.z;
+MULH  H0.x(EQ), H0.w, H1;
+MAXH  H0.w, H0.x, c[4].z;
+TEX   H0.xyz, fragment.texcoord[0], texture[1], 2D;
+MULH  H1.xyz, H0.w, H0;
+TEX   H0.xyz, fragment.texcoord[0], texture[0], 2D;
+MADH  H1.xyz, H1, c[5].y, H0;
+NRMH  H0.xyz, fragment.texcoord[4];
+DP3H  H0.x, -H0, fragment.texcoord[3];
+MADH  H0.x, -|H0|, c[1], c[1].y;
+ADDH  H0.x, H0, c[4].y;
+MAXH  H0.x, H0, c[4].z;
+MADH  oCol.xyz, H0.x, c[0], H1;
+MOVH  oCol.w, c[4].x;
+END
+# 33 instructions, 0 R-regs, 2 H-regs
